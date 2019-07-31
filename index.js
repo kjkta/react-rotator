@@ -1,12 +1,10 @@
 import React from "react";
-import useMouse from "@rooks/use-mouse";
 
 export default function useRotator(initialDegree, enableDragging = true) {
   const ref = React.useRef(null);
   const [degree, setDegree] = React.useState(initialDegree);
-  const mousePos = useMouse();
   const handleRef = React.useRef(null);
-  const isDragging = useDragging(handleRef.current);
+  const [isDragging, mousePos] = useDragging(handleRef.current);
 
   React.useEffect(
     function() {
@@ -33,30 +31,42 @@ const MOUSE_DOWN = "MOUSE_DOWN";
 const MOUSE_MOVE = "MOUSE_MOVE";
 const MOUSE_UP = "MOUSE_UP";
 function useDragging(el) {
-  const [{ mouseDown, mouseDragging }, dispatch] = React.useReducer(
+  const [{ mouseDragging, mousePosition }, dispatch] = React.useReducer(
     function(state, action) {
       switch (action.type) {
         case MOUSE_DOWN:
-          return { mouseDown: true, mouseDragging: false };
+          return {
+            mouseDown: true,
+            mouseDragging: false,
+            mousePosition: action.payload
+          };
         case MOUSE_MOVE:
-          return { ...state, mouseDragging: state.mouseDown ? true : false };
+          return {
+            ...state,
+            mouseDragging: state.mouseDown ? true : false,
+            mousePosition: action.payload
+          };
         case MOUSE_UP:
-          return { mouseDown: false, mouseDragging: false };
+          return {
+            mouseDown: false,
+            mouseDragging: false,
+            mousePosition: action.payload
+          };
       }
     },
     { mouseDown: false, mouseDragging: false }
   );
 
-  function handleMouseDown() {
-    dispatch({ type: MOUSE_DOWN });
+  function handleMouseDown({ clientX, clientY }) {
+    dispatch({ type: MOUSE_DOWN, payload: { clientX, clientY } });
   }
 
-  function handleMouseMove() {
-    dispatch({ type: MOUSE_MOVE });
+  function handleMouseMove({ clientX, clientY }) {
+    dispatch({ type: MOUSE_MOVE, payload: { clientX, clientY } });
   }
 
-  function handleMouseUp() {
-    dispatch({ type: MOUSE_UP });
+  function handleMouseUp({ clientX, clientY }) {
+    dispatch({ type: MOUSE_UP, payload: { clientX, clientY } });
   }
 
   React.useEffect(() => {
@@ -75,5 +85,5 @@ function useDragging(el) {
     };
   }, [el]);
 
-  return mouseDragging;
+  return [mouseDragging, mousePosition];
 }
