@@ -1,20 +1,22 @@
 {
-  "name": "react",
-  "version": "0.0.0",
-  "private": true,
-  "dependencies": {
-    "@rooks/use-debounce": "3.1.0",
-    "@rooks/use-mouse": "3.0.1",
-    "react": "16.8.6",
-    "react-dom": "16.8.6"
-  },
+  "name": "use-rotator",
+  "version": "0.0.1",
+  "license": "MIT",
+  "source": "index.js",
+  "main": "dist/use-rotator.js",
+  "module": "dist/use-rotator.mjs",
+  "unpkg": "dist/use-rotator.umd.js",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "build": "microbundle",
+    "dev": "microbundle watch"
+  },
+  "peerDependencies": {
+    "react": ">=16.0.0"
   },
   "devDependencies": {
+    "@rooks/use-debounce": "3.1.0",
+    "@rooks/use-mouse": "3.0.1",
+    "microbundle": "^0.11.0",
     "react-scripts": "latest"
   }
 }
