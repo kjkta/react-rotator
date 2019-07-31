@@ -14,7 +14,6 @@
     "react": ">=16.0.0"
   },
   "devDependencies": {
-    "@rooks/use-debounce": "3.1.0",
     "@rooks/use-mouse": "3.0.1",
     "microbundle": "^0.11.0"
   }
