@@ -1,0 +1,22 @@
+{
+  "name": "react",
+  "version": "0.0.0",
+  "private": true,
+  "dependencies": {
+    "@rooks/use-debounce": "3.1.0",
+    "@rooks/use-mouse": "3.0.1",
+    "lodash.debounce": "4.0.8",
+    "lodash.throttle": "^4.1.1",
+    "react": "16.8.6",
+    "react-dom": "16.8.6"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "react-scripts": "latest"
+  }
+}
