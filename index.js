@@ -1,9 +1,7 @@
-import React, { Component } from 'react';
-import { render } from 'react-dom';
+import React from 'react';
 import useMouse from "@rooks/use-mouse"
-import debounce from "lodash.debounce"
 
-function Rotator({ children, enableDragging = true, initialDegree = 0 }) {
+export default function useRotator(initialDegree, enableDragging) {
   const ref = React.useRef(null)
   const [degree, setDegree] = React.useState(initialDegree);
   const mousePos = useMouse()
@@ -22,25 +20,7 @@ function Rotator({ children, enableDragging = true, initialDegree = 0 }) {
     }
   }, [mousePos, ref.current, isDragging])
 
-  const color = "blue";
-  const size = 10
-  const height = 30
-
-  return <div
-    ref={ref}
-
-    style={{ position: "relative", backgroundColor: "yellow", display: "inline-block", width: 100, height: 200, transform: `rotate(${degree}deg)` }}
-  >
-    {isDragging.toString()}
-    {enableDragging &&
-      <div ref={handleRef} style={{ height, width: 2, backgroundColor: color, position: "absolute", left: "50%", top: -height, transform: "translateX(-50%)" }} >
-        <div style={{ position: "relative" }}>
-          <div style={{ position: "absolute", left: "50%", transform: "translateX(-50%)", top: -size, backgroundColor: color, width: size, height: size, borderRadius: "50%", cursor: "col-resize" }} />
-        </div>
-      </div>
-    }
-    {children}
-  </div>
+  return [ref, handleRef, degree, isDragging]
 }
 
 function useDragging(el) {
@@ -89,5 +69,3 @@ function useDragging(el) {
 
   return mouseDragging
 }
-
-render(<div style={{ margin: 50 }}><Rotator /></div>, document.getElementById('root'));
