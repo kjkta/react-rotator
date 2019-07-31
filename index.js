@@ -1,7 +1,7 @@
 import React from "react";
 import useMouse from "@rooks/use-mouse";
 
-export default function useRotator(initialDegree, enableDragging) {
+export default function useRotator(initialDegree, enableDragging = true) {
   const ref = React.useRef(null);
   const [degree, setDegree] = React.useState(initialDegree);
   const mousePos = useMouse();
