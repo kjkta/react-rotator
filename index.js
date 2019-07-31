@@ -56,7 +56,11 @@ function useDragging(el) {
           return state;
       }
     },
-    { mouseDown: false, mouseDragging: false }
+    {
+      mouseDown: false,
+      mouseDragging: false,
+      mousePosition: { clientX: null, clientY: null }
+    }
   );
 
   function handleMouseDown({ clientX, clientY }) {
