@@ -3,6 +3,9 @@
 Rotate an element with a handle
 
 ```jsx
+import React from "react";
+import useRotator from "use-rotator";
+
 function App() {
   const [rotatableRef, handleRef, degree, isDragging] = useRotator(0, true);
   return (
