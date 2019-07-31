@@ -52,6 +52,8 @@ function useDragging(el) {
             mouseDragging: false,
             mousePosition: action.payload
           };
+        default:
+          return state;
       }
     },
     { mouseDown: false, mouseDragging: false }
